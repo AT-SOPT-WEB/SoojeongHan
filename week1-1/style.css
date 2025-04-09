@@ -1,0 +1,37 @@
+body {
+  padding: 30px;
+  background-color: #f4f4f4;
+}
+
+header {
+  background-color: aqua;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+}
+
+
+main {
+  display: flex;
+  margin: 20px 0;
+  gap: 20px;
+}
+
+section {
+  flex: 2;
+  background-color: white;
+  padding: 20px;
+}
+
+aside {
+  flex: 1;
+  background-color: white;
+  padding: 20px;
+}
+footer {
+  background-color: aqua;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: auto;
+}
