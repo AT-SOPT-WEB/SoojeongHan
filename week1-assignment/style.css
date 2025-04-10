@@ -7,7 +7,7 @@ body {
   color: #333;
 }
 
-/* 헤더 */
+/* header */
 header {
   display: grid;
 
@@ -128,7 +128,7 @@ section p {
   grid-auto-rows: 150px;
   gap: 10px;
   margin-top: 1rem;
-  padding: 5rem;
+  padding: 2rem;
   
 }
 
@@ -168,10 +168,10 @@ section p {
   padding: 2rem;
 }
 
-/* 이거 맞나 .. */
+/* 최대 5개! 이거 맞나 .. */
 @media (min-width: 1200px) {
   .white-box-wrapper {
-    grid-template-columns: repeat(5, 1fr); /* 최대 5개! */
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 
@@ -226,8 +226,16 @@ section p {
   position: relative;
 }
 
+.heart-label:hover {
+  color: #f1dce1;
+}
+
 .heart-label .filled-heart {
   display: none;
+}
+
+.heart-toggle:checked + .heart-label {
+  color: #f1dce1;
 }
 
 .heart-toggle:checked + .heart-label .filled-heart {
