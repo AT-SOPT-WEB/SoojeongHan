@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="png" href="assets/Ghibli_logo.png" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://kit.fontawesome.com/9c71be1e79.js" crossorigin="anonymous"></script>
+    <title>Soojeong's blog</title>
+  </head>
+  <body>
+    <!-- header -->
+    <header>
+      <img src="assets/Ghibli_logo.png" alt="블로그 로고이미지" class="logo" />
+      <h1 class="site-title">수정이의 블로그</h1>
+      <i class="fa-solid fa-bars"></i>
+    </header>
+
+    <!-- nav -->
+    <nav class="side-nav">
+      <h2 class="nav-title">분류</h2>
+      <div class="nav-buttons">
+        <a class="nav-btn" href="#all">전체</a>
+        <a class="nav-btn" href="#daily">일상</a>
+        <a class="nav-btn" href="#dev">개발</a>
+      </div>
+    </nav>
+
+    <!-- main -->
+    <main class="main-content">
+      <!-- 상단 grid -->
+      <section class="section-content">
+        <h2>안녕하세요^^ 한수정의 블로그입니다 ~</h2>
+        <article class="grid-custom">
+          <img src="assets/Ghibli_From Up on Poppy Hill.jpg" alt="코쿠리코 언덕에서 이미지" class="img1" />
+          <img src="assets/Ghibli_Princess Mononoke.jpg" alt="모노노케 히메 이미지" class="img2" />
+          <img src="assets/Ghibli_Whisper of the Heart.jpg" alt="귀를 기울이면 이미지" class="img3" />
+          <img src="assets/Ghibli_Castle in the Sky.jpg" alt="천공의 성 라퓨타 이미지" class="img4" />
+          <img
+            src="assets/Ghibli_Nausicaä of the Valley of the Wind.jpg"
+            alt="바람 계곡의 나우시카 이미지"
+            class="img5"
+          />
+        </article>
+      </section>
+
+      <!-- 전체 -->
+      <section id="all" class="section-content">
+        <h2>전체</h2>
+        <article class="item-box-wrapper">
+          <div class="item-box">
+            <div class="img-wrapper">
+              <img src="assets/Ghibli_Whisper of the Heart.jpg" alt="귀를 기울이면 이미지" />
+            </div>
+            <p>귀를 기울이면</p>
+            <p class="like-count">좋아요 12개</p>
+            <input type="checkbox" id="heart-1" class="heart-toggle" />
+            <label for="heart-1" class="heart-label">
+              <i class="fa-regular fa-heart empty-heart"></i>
+              <i class="fa-solid fa-heart filled-heart"></i>
+            </label>
+          </div>
+          <div class="item-box">
+            <div class="img-wrapper">
+              <img src="assets/Ghibli_Princess Mononoke.jpg" alt="모노노케 히메 이미지" />
+            </div>
+            <p>모노노케 히메</p>
+            <p class="like-count">좋아요 12개</p>
+            <input type="checkbox" id="heart-2" class="heart-toggle" />
+            <label for="heart-2" class="heart-label">
+              <i class="fa-regular fa-heart empty-heart"></i>
+              <i class="fa-solid fa-heart filled-heart"></i>
+            </label>
+          </div>
+          <div class="item-box">
+            <div class="img-wrapper">
+              <img src="assets/Ghibli_Castle in the Sky.jpg" alt="천공의 성 라퓨타 이미지" />
+            </div>
+            <p>천공의 성 라퓨타</p>
+            <p class="like-count">좋아요 12개</p>
+            <input type="checkbox" id="heart-3" class="heart-toggle" />
+            <label for="heart-3" class="heart-label">
+              <i class="fa-regular fa-heart empty-heart"></i>
+              <i class="fa-solid fa-heart filled-heart"></i>
+            </label>
+          </div>
+          <div class="item-box">
+            <div class="img-wrapper">
+              <img src="assets/Ghibli_From Up on Poppy Hill.jpg" alt="코쿠리코 언덕에서 이미지" />
+            </div>
+            <p>코쿠리코 언덕에서</p>
+            <p class="like-count">좋아요 12개</p>
+            <input type="checkbox" id="heart-4" class="heart-toggle" />
+            <label for="heart-4" class="heart-label">
+              <i class="fa-regular fa-heart empty-heart"></i>
+              <i class="fa-solid fa-heart filled-heart"></i>
+            </label>
+          </div>
+          <div class="item-box">
+            <div class="img-wrapper">
+              <img src="assets/Ghibli_Howl's Moving Castle.jpg" alt="하울의 움직이는 성 이미지" />
+            </div>
+            <p>하울의 움직이는 성</p>
+            <p class="like-count">좋아요 12개</p>
+            <input type="checkbox" id="heart-5" class="heart-toggle" />
+            <label for="heart-5" class="heart-label">
+              <i class="fa-regular fa-heart empty-heart"></i>
+              <i class="fa-solid fa-heart filled-heart"></i>
+            </label>
+          </div>
+          <div class="item-box">
+            <div class="img-wrapper">
+              <img src="assets/Ghibli_Nausicaä of the Valley of the Wind.jpg" alt="바람 계곡의 나우시카 이미지" />
+            </div>
+            <p>바람 계곡의 나우시카</p>
+            <p class="like-count">좋아요 12개</p>
+            <input type="checkbox" id="heart-6" class="heart-toggle" />
+            <label for="heart-6" class="heart-label">
+              <i class="fa-regular fa-heart empty-heart"></i>
+              <i class="fa-solid fa-heart filled-heart"></i>
+            </label>
+          </div>
+          <div class="item-box">
+            <div class="img-wrapper">
+              <img src="assets/Ghibli_Ponyo.jpg" alt="벼랑 위의 포뇨 이미지" />
+            </div>
+            <p>벼랑 위의 포뇨</p>
+            <p class="like-count">좋아요 12개</p>
+            <input type="checkbox" id="heart-7" class="heart-toggle" />
+            <label for="heart-7" class="heart-label">
+              <i class="fa-regular fa-heart empty-heart"></i>
+              <i class="fa-solid fa-heart filled-heart"></i>
+            </label>
+          </div>
+          <div class="item-box">
+            <div class="img-wrapper">
+              <img src="assets/Ghibli_Spirited Away.jpg" alt="센과 치히로의 행방불명 이미지" />
+            </div>
+            <p>센과 치히로의 행방불명</p>
+            <p class="like-count">좋아요 12개</p>
+            <input type="checkbox" id="heart-8" class="heart-toggle" />
+            <label for="heart-8" class="heart-label">
+              <i class="fa-regular fa-heart empty-heart"></i>
+              <i class="fa-solid fa-heart filled-heart"></i>
+            </label>
+          </div>
+        </article>
+      </section>
+
+      <!-- 일상 -->
+      <section id="daily" class="section-content">
+        <h2>일상</h2>
+        <article class="item-box-wrapper">
+          <div class="item-box">
+            <div class="img-wrapper">
+              <img src="assets/Ghibli_Whisper of the Heart.jpg" alt="귀를 기울이면 이미지" />
+            </div>
+            <p>귀를 기울이면</p>
+            <p class="like-count">좋아요 12개</p>
+            <input type="checkbox" id="heart-9" class="heart-toggle" />
+            <label for="heart-9" class="heart-label">
+              <i class="fa-regular fa-heart empty-heart"></i>
+              <i class="fa-solid fa-heart filled-heart"></i>
+            </label>
+          </div>
+          <div class="item-box">
+            <div class="img-wrapper">
+              <img src="assets/Ghibli_Princess Mononoke.jpg" alt="모노노케 히메 이미지" />
+            </div>
+            <p>모노노케 히메</p>
+            <p class="like-count">좋아요 12개</p>
+            <input type="checkbox" id="heart-10" class="heart-toggle" />
+            <label for="heart-10" class="heart-label">
+              <i class="fa-regular fa-heart empty-heart"></i>
+              <i class="fa-solid fa-heart filled-heart"></i>
+            </label>
+          </div>
+          <div class="item-box">
+            <div class="img-wrapper">
+              <img src="assets/Ghibli_Castle in the Sky.jpg" alt="천공의 성 라퓨타 이미지" />
+            </div>
+            <p>천공의 성 라퓨타</p>
+            <p class="like-count">좋아요 12개</p>
+            <input type="checkbox" id="heart-11" class="heart-toggle" />
+            <label for="heart-11" class="heart-label">
+              <i class="fa-regular fa-heart empty-heart"></i>
+              <i class="fa-solid fa-heart filled-heart"></i>
+            </label>
+          </div>
+          <div class="item-box">
+            <div class="img-wrapper">
+              <img src="assets/Ghibli_From Up on Poppy Hill.jpg" alt="코쿠리코 언덕에서 이미지" />
+            </div>
+            <p>코쿠리코 언덕에서</p>
+            <p class="like-count">좋아요 12개</p>
+            <input type="checkbox" id="heart-12" class="heart-toggle" />
+            <label for="heart-12" class="heart-label">
+              <i class="fa-regular fa-heart empty-heart"></i>
+              <i class="fa-solid fa-heart filled-heart"></i>
+            </label>
+          </div>
+          <div class="item-box">
+            <div class="img-wrapper">
+              <img src="assets/Ghibli_Howl's Moving Castle.jpg" alt="하울의 움직이는 성 이미지" />
+            </div>
+            <p>하울의 움직이는 성</p>
+            <p class="like-count">좋아요 12개</p>
+            <input type="checkbox" id="heart-13" class="heart-toggle" />
+            <label for="heart-13" class="heart-label">
+              <i class="fa-regular fa-heart empty-heart"></i>
+              <i class="fa-solid fa-heart filled-heart"></i>
+            </label>
+          </div>
+          <div class="item-box">
+            <div class="img-wrapper">
+              <img src="assets/Ghibli_Nausicaä of the Valley of the Wind.jpg" alt="바람 계곡의 나우시카 이미지" />
+            </div>
+            <p>바람 계곡의 나우시카</p>
+            <p class="like-count">좋아요 12개</p>
+            <input type="checkbox" id="heart-14" class="heart-toggle" />
+            <label for="heart-14" class="heart-label">
+              <i class="fa-regular fa-heart empty-heart"></i>
+              <i class="fa-solid fa-heart filled-heart"></i>
+            </label>
+          </div>
+        </article>
+      </section>
+
+      <!-- 개발 -->
+      <section id="dev" class="section-content">
+        <h2>개발</h2>
+        <article class="item-box-wrapper">
+          <div class="item-box">
+            <div class="img-wrapper">
+              <img src="assets/Ghibli_Princess Mononoke.jpg" alt="모노노케 히메 이미지" />
+            </div>
+            <p>모노노케 히메</p>
+            <p class="like-count">좋아요 12개</p>
+            <input type="checkbox" id="heart-15" class="heart-toggle" />
+            <label for="heart-15" class="heart-label">
+              <i class="fa-regular fa-heart empty-heart"></i>
+              <i class="fa-solid fa-heart filled-heart"></i>
+            </label>
+          </div>
+          <div class="item-box">
+            <div class="img-wrapper">
+              <img src="assets/Ghibli_Castle in the Sky.jpg" alt="천공의 성 라퓨타 이미지" />
+            </div>
+            <p>천공의 성 라퓨타</p>
+            <p class="like-count">좋아요 12개</p>
+            <input type="checkbox" id="heart-16" class="heart-toggle" />
+            <label for="heart-16" class="heart-label">
+              <i class="fa-regular fa-heart empty-heart"></i>
+              <i class="fa-solid fa-heart filled-heart"></i>
+            </label>
+          </div>
+          <div class="item-box">
+            <div class="img-wrapper">
+              <img src="assets/Ghibli_Howl's Moving Castle.jpg" alt="하울의 움직이는 성 이미지" />
+            </div>
+            <p>하울의 움직이는 성</p>
+            <p class="like-count">좋아요 12개</p>
+            <input type="checkbox" id="heart-17" class="heart-toggle" />
+            <label for="heart-17" class="heart-label">
+              <i class="fa-regular fa-heart empty-heart"></i>
+              <i class="fa-solid fa-heart filled-heart"></i>
+            </label>
+          </div>
+          <div class="item-box">
+            <div class="img-wrapper">
+              <img src="assets/Ghibli_Nausicaä of the Valley of the Wind.jpg" alt="바람 계곡의 나우시카 이미지" />
+            </div>
+            <p>바람 계곡의 나우시카</p>
+            <p class="like-count">좋아요 12개</p>
+            <input type="checkbox" id="heart-18" class="heart-toggle" />
+            <label for="heart-18" class="heart-label">
+              <i class="fa-regular fa-heart empty-heart"></i>
+              <i class="fa-solid fa-heart filled-heart"></i>
+            </label>
+          </div>
+          <div class="item-box">
+            <div class="img-wrapper">
+              <img src="assets/Ghibli_Ponyo.jpg" alt="벼랑 위의 포뇨 이미지" />
+            </div>
+            <p>벼랑 위의 포뇨</p>
+            <p class="like-count">좋아요 12개</p>
+            <input type="checkbox" id="heart-19" class="heart-toggle" />
+            <label for="heart-19" class="heart-label">
+              <i class="fa-regular fa-heart empty-heart"></i>
+              <i class="fa-solid fa-heart filled-heart"></i>
+            </label>
+          </div>
+          <div class="item-box">
+            <div class="img-wrapper">
+              <img src="assets/Ghibli_Spirited Away.jpg" alt="센과 치히로의 행방불명 이미지" />
+            </div>
+            <p>센과 치히로의 행방불명</p>
+            <p class="like-count">좋아요 12개</p>
+            <input type="checkbox" id="heart-20" class="heart-toggle" />
+            <label for="heart-20" class="heart-label">
+              <i class="fa-regular fa-heart empty-heart"></i>
+              <i class="fa-solid fa-heart filled-heart"></i>
+            </label>
+          </div>
+        </article>
+      </section>
+
+      <!-- 무한 배너 -->
+      <section class="infinity-banner">
+        <article class="infinity-track">
+          <img src="assets/Ghibli_Castle in the Sky.jpg" alt="천공의 성 라퓨타 이미지" />
+          <img src="assets/Ghibli_Howl's Moving Castle.jpg" alt="하울의 움직이는 성 이미지" />
+          <img src="assets/Ghibli_Spirited Away.jpg" alt="센과 치히로의 행방불명 이미지" />
+          <img src="assets/Ghibli_Ponyo.jpg" alt="벼랑 위의 포뇨 이미지" />
+          <img src="assets/Ghibli_From Up on Poppy Hill.jpg" alt="코쿠리코 언덕에서 이미지" />
+          <img src="assets/Ghibli_Nausicaä of the Valley of the Wind.jpg" alt="바람 계곡의 나우시카 이미지" />
+          <img src="assets/Ghibli_Whisper of the Heart.jpg" alt="귀를 기울이면 이미지" />
+          <img src="assets/Ghibli_Princess Mononoke.jpg" alt="모노노케 히메 이미지" />
+
+          <!-- 한 번 더 반복 -->
+          <img src="assets/Ghibli_Castle in the Sky.jpg" alt="천공의 성 라퓨타 이미지" />
+          <img src="assets/Ghibli_Howl's Moving Castle.jpg" alt="하울의 움직이는 성 이미지" />
+          <img src="assets/Ghibli_Spirited Away.jpg" alt="센과 치히로의 행방불명 이미지" />
+          <img src="assets/Ghibli_Ponyo.jpg" alt="벼랑 위의 포뇨 이미지" />
+          <img src="assets/Ghibli_From Up on Poppy Hill.jpg" alt="코쿠리코 언덕에서 이미지" />
+          <img src="assets/Ghibli_Nausicaä of the Valley of the Wind.jpg" alt="바람 계곡의 나우시카 이미지" />
+          <img src="assets/Ghibli_Whisper of the Heart.jpg" alt="귀를 기울이면 이미지" />
+          <img src="assets/Ghibli_Princess Mononoke.jpg" alt="모노노케 히메 이미지" />
+        </article>
+      </section>
+    </main>
+
+    <!-- footer -->
+    <footer>
+      <p>© AT SOPT WEB 1주차 과제</p>
+      <p>다들 파이팅</p>
+    </footer>
+  </body>
+</html>
