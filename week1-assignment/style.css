@@ -160,7 +160,7 @@ section p {
   grid-row: 3 / span 2;
 }
 
-.white-box-wrapper {
+.item-box-wrapper {
   display: grid;
   max-width: 100%;
   gap: 2rem;
@@ -172,12 +172,12 @@ section p {
 
 /* 최대 5개 */
 @media (min-width: 1200px) {
-  .white-box-wrapper {
+  .item-box-wrapper {
     grid-template-columns: repeat(5, 1fr);
   }
 }
 
-.white-box {
+.item-box {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -190,7 +190,7 @@ section p {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.white-box:hover {
+.item-box:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
