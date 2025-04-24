@@ -1,0 +1,111 @@
+body {
+  /* padding: 0 auto; */
+  padding: 0 20rem;
+  min-width: 30rem;
+}
+
+nav {
+  display: flex;
+  padding: 2rem 0;
+  gap: 1rem;
+  /* margin: 0 20rem; */
+
+}
+
+main{
+  /* margin: 0 20rem; */
+
+  padding: 1.5rem 1rem;
+  background-color: #eee;
+  border-radius: 5px;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* 드롭다운  */
+.priority-select {
+  position: relative;
+  display: inline-block;
+}
+#priority-options {
+  position: absolute;
+  background: #fff;
+  border: 1px solid #ccc;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  border-radius: 5px;
+}
+#priority-options li {
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  font-size: 1rem;
+}
+#priority-options li:hover {
+  background: #eee;
+}
+
+form {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+form input[type="text"],
+form select
+{
+  height: 2.4rem;
+  font-size: 1rem;
+  padding: 0 0.5rem;
+  box-sizing: border-box;
+}
+
+form input[type="text"] {
+  flex: 1;
+}
+
+form select {
+  max-width: 10rem;
+}
+
+.control-buttons {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 0.5em;
+  width: 100%;
+  padding: 1rem 0;
+}
+
+/* 할일 목록 */
+#todo-list {
+  width: 100%;
+}
+
+/* 테이블 헤더 스타일 */
+#todo-list thead {
+  background-color: #333;
+  color: #fff;
+}
+
+#todo-list th {
+  padding: 10px;
+  text-align: center;
+}
+
+#todo-list td {
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  background: #fff;
+  text-align: center;
+}
+
