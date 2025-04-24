@@ -28,14 +28,52 @@ function renderTodos(data) {
   const tbody = todoList.querySelector('tbody');
   tbody.innerHTML = '';
 
-  data.forEach((todo) => {
+  data.forEach((todo, index) => {
     const tr = document.createElement('tr');
+    tr.setAttribute('draggable', 'true'); 
+    tr.dataset.index = index;
+
     tr.innerHTML = `
       <td><input type="checkbox" data-id="${todo.id}" /></td>
       <td>${todo.priority}</td>
       <td>${todo.completed ? '✅' : '❌'}</td>
       <td>${todo.title}</td>
     `;
+    
+    // 드래그 이벤트 처리
+    tr.addEventListener('dragstart', (e) => {
+      e.dataTransfer.setData('text/plain', tr.dataset.index); 
+      setTimeout(() => tr.style.opacity = '0.6', 0);
+    });
+
+    tr.addEventListener('dragend', () => {
+      tr.style.display = '';
+    });
+
+    // 드롭 가능 영역 처리
+    tr.addEventListener('dragover', (e) => {
+      e.preventDefault();
+    });
+
+    tr.addEventListener('drop', (e) => {
+      e.preventDefault();
+
+      const draggedIndex = e.dataTransfer.getData('text/plain');
+      const targetIndex = tr.dataset.index;
+
+      if (draggedIndex !== targetIndex) {
+        const newTodos = [...todos];
+
+        // 배열에서 항목을 이동
+        const draggedTodo = newTodos.splice(draggedIndex, 1)[0];
+        newTodos.splice(targetIndex, 0, draggedTodo);
+
+        todos = newTodos;
+        saveTodos(todos);
+        renderTodos(todos);
+      }
+    });
+
     tbody.appendChild(tr);
   });
 
@@ -56,6 +94,7 @@ function renderTodos(data) {
       toggleAllCheckbox.checked = checkboxes.length === checked.length;
     }
   });
+
   const checkboxes = tbody.querySelectorAll('input[type="checkbox"]');
   const checked = tbody.querySelectorAll('input[type="checkbox"]:checked');
   toggleAllCheckbox.checked = checkboxes.length > 0 && checkboxes.length === checked.length;
@@ -168,7 +207,7 @@ completeBtn.addEventListener('click', () => {
   );
 
   if (alreadyCompleted) {
-    modal.classList.add('show'); // show 클래스 붙이기
+    modal.classList.add('show');
     return;
   }
 
@@ -185,7 +224,7 @@ completeBtn.addEventListener('click', () => {
 });
 
 closeModalBtn.addEventListener('click', () => {
-  modal.classList.remove('show'); // show 클래스 제거 = 숨김
+  modal.classList.remove('show');
 });
 
 // 초기 로드
