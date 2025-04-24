@@ -1,4 +1,4 @@
-import { todos } from './data/todos.js';
+import { todos as initialTodos } from './data/todos.js';
 
 const todoList = document.getElementById('todo-list');
 const allBtn = document.getElementById('filter-all');
@@ -7,30 +7,31 @@ const uncompletedBtn = document.getElementById('filter-uncompleted');
 const priorityButton = document.getElementById("priority-button");
 const dropdown = document.getElementById("priority-options");
 
-// 로컬 스토리지에서 todos 불러오기
+let todos = getTodos();
+
 function getTodos() {
-  const storedTodos = localStorage.getItem("todos");
-  if (storedTodos) {
-    return JSON.parse(storedTodos);
+  const stored = localStorage.getItem("todos");
+  if (stored) {
+    return JSON.parse(stored);
+  } else {
+    localStorage.setItem("todos", JSON.stringify(initialTodos));
+    return [...initialTodos];
   }
-  localStorage.setItem("todos", JSON.stringify(todos)); 
-  return todos;
 }
 
-// 로컬 스토리지에 todos 저장하기
 function saveTodos(todos) {
   localStorage.setItem("todos", JSON.stringify(todos));
 }
 
-// 할 일 렌더링
+// todos 렌더링
 function renderTodos(data) {
   const tbody = todoList.querySelector('tbody');
-  tbody.innerHTML = ''; // 기존 내용을 지우고 새로 갱신
+  tbody.innerHTML = '';
 
   data.forEach((todo) => {
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td><input type="checkbox" ${todo.completed ? 'checked' : ''} /></td>
+      <td><input type="checkbox" data-id="${todo.id}" /></td>
       <td>${todo.priority}</td>
       <td>${todo.completed ? '✅' : '❌'}</td>
       <td>${todo.title}</td>
@@ -55,18 +56,21 @@ function renderTodos(data) {
       toggleAllCheckbox.checked = checkboxes.length === checked.length;
     }
   });
+  const checkboxes = tbody.querySelectorAll('input[type="checkbox"]');
+  const checked = tbody.querySelectorAll('input[type="checkbox"]:checked');
+  toggleAllCheckbox.checked = checkboxes.length > 0 && checkboxes.length === checked.length;
 }
 
-// 필터 함수들
-allBtn.addEventListener('click', () => renderTodos(currentTodos));
+// 필터 함수
+allBtn.addEventListener('click', () => renderTodos(todos));
 
 completedBtn.addEventListener('click', () => {
-  const filtered = currentTodos.filter((todo) => todo.completed);
+  const filtered = todos.filter((todo) => todo.completed);
   renderTodos(filtered);
 });
 
 uncompletedBtn.addEventListener('click', () => {
-  const filtered = currentTodos.filter((todo) => !todo.completed);
+  const filtered = todos.filter((todo) => !todo.completed);
   renderTodos(filtered);
 });
 
@@ -131,9 +135,57 @@ form.addEventListener("submit", (e) => {
   // 다시 렌더링
   renderTodos(todos);
 
-  // 입력창 초기화
   input.value = "";
   select.selectedIndex = 0;
+});
+
+const deleteBtn = document.querySelector('.control-buttons button:nth-child(1)');
+const completeBtn = document.querySelector('.control-buttons button:nth-child(2)');
+const modal = document.getElementById('completed-modal');
+const closeModalBtn = document.getElementById('close-modal');
+
+
+deleteBtn.addEventListener('click', () => {
+  const checkboxes = document.querySelectorAll('#todo-list tbody input[type="checkbox"]:checked');
+  if (checkboxes.length === 0) return;
+
+  const idsToDelete = Array.from(checkboxes).map(cb => Number(cb.dataset.id));
+  const updated = getTodos().filter(todo => !idsToDelete.includes(todo.id));
+  saveTodos(updated);
+  todos = updated;
+  renderTodos(updated);
+});
+
+completeBtn.addEventListener('click', () => {
+  const checkboxes = document.querySelectorAll('#todo-list tbody input[type="checkbox"]:checked');
+  if (checkboxes.length === 0) return;
+
+  const idsToComplete = Array.from(checkboxes).map(cb => Number(cb.dataset.id));
+  const currentTodos = getTodos();
+
+  const alreadyCompleted = currentTodos.some(todo =>
+    idsToComplete.includes(todo.id) && todo.completed
+  );
+
+  if (alreadyCompleted) {
+    modal.classList.add('show'); // show 클래스 붙이기
+    return;
+  }
+
+  const updated = currentTodos.map(todo => {
+    if (idsToComplete.includes(todo.id)) {
+      return { ...todo, completed: true };
+    }
+    return todo;
+  });
+
+  saveTodos(updated);
+  todos = updated;
+  renderTodos(updated);
+});
+
+closeModalBtn.addEventListener('click', () => {
+  modal.classList.remove('show'); // show 클래스 제거 = 숨김
 });
 
 // 초기 로드

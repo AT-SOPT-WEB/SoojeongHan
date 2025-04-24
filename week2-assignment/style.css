@@ -1,5 +1,4 @@
 body {
-  /* padding: 0 auto; */
   padding: 0 20rem;
   min-width: 30rem;
 }
@@ -8,49 +7,51 @@ nav {
   display: flex;
   padding: 2rem 0;
   gap: 1rem;
-  /* margin: 0 20rem; */
-
 }
 
 main{
-  /* margin: 0 20rem; */
-
   padding: 1.5rem 1rem;
-  background-color: #eee;
+
   border-radius: 5px;
+  background-color: #eee;
 }
 
 button {
   padding: 0.5rem 1rem;
-  background-color: #333;
-  color: #fff;
+
   border: none;
   border-radius: 5px;
   font-size: 1rem;
+
+  background-color: #333;
+  color: #fff;
   cursor: pointer;
 }
 
 /* 드롭다운  */
 .priority-select {
-  position: relative;
   display: inline-block;
+  position: relative;
 }
+
 #priority-options {
   position: absolute;
-  background: #fff;
-  border: 1px solid #ccc;
-  list-style: none;
   padding: 0;
   margin: 0;
   width: 100%;
+
+  border: 1px solid #ccc;
   border-radius: 5px;
+  background: #fff;
 }
+
 #priority-options li {
   padding: 1rem;
   text-align: center;
-  cursor: pointer;
   font-size: 1rem;
+  cursor: pointer;
 }
+
 #priority-options li:hover {
   background: #eee;
 }
@@ -65,8 +66,8 @@ form input[type="text"],
 form select
 {
   height: 2.4rem;
-  font-size: 1rem;
   padding: 0 0.5rem;
+  font-size: 1rem;
   box-sizing: border-box;
 }
 
@@ -81,9 +82,9 @@ form select {
 .control-buttons {
   display: flex;
   flex-direction: row-reverse;
+  padding: 1rem 0;
   gap: 0.5em;
   width: 100%;
-  padding: 1rem 0;
 }
 
 /* 할일 목록 */
@@ -100,12 +101,45 @@ form select {
 #todo-list th {
   padding: 10px;
   text-align: center;
+  vertical-align: middle;
 }
 
 #todo-list td {
   padding: 10px;
-  border-top: 1px solid #ddd;
-  background: #fff;
   text-align: center;
+  vertical-align: middle;
+
+  background: #fff;
+  border-top: 1px solid #ddd;
 }
 
+/* 모달 */
+.modal {
+  display: none;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+
+  padding: 2rem;
+  align-items: center;
+  gap:2rem;
+
+  border-radius: 7px;
+  background: white;
+}
