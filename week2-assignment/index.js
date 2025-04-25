@@ -6,227 +6,176 @@ const completedBtn = document.getElementById('filter-completed');
 const uncompletedBtn = document.getElementById('filter-uncompleted');
 const priorityButton = document.getElementById("priority-button");
 const dropdown = document.getElementById("priority-options");
-
-let todos = getTodos();
-
-function getTodos() {
-  const stored = localStorage.getItem("todos");
-  if (stored) {
-    return JSON.parse(stored);
-  } else {
-    localStorage.setItem("todos", JSON.stringify(initialTodos));
-    return [...initialTodos];
-  }
-}
-
-function saveTodos(todos) {
-  localStorage.setItem("todos", JSON.stringify(todos));
-}
-
-// todos 렌더링
-function renderTodos(data) {
-  const tbody = todoList.querySelector('tbody');
-  tbody.innerHTML = '';
-
-  data.forEach((todo, index) => {
-    const tr = document.createElement('tr');
-    tr.setAttribute('draggable', 'true'); 
-    tr.dataset.index = index;
-
-    tr.innerHTML = `
-      <td><input type="checkbox" data-id="${todo.id}" /></td>
-      <td>${todo.priority}</td>
-      <td>${todo.completed ? '✅' : '❌'}</td>
-      <td>${todo.title}</td>
-    `;
-    
-    // 드래그 이벤트 처리
-    tr.addEventListener('dragstart', (e) => {
-      e.dataTransfer.setData('text/plain', tr.dataset.index); 
-      setTimeout(() => tr.style.opacity = '0.6', 0);
-    });
-
-    tr.addEventListener('dragend', () => {
-      tr.style.display = '';
-    });
-
-    // 드롭 가능 영역 처리
-    tr.addEventListener('dragover', (e) => {
-      e.preventDefault();
-    });
-
-    tr.addEventListener('drop', (e) => {
-      e.preventDefault();
-
-      const draggedIndex = e.dataTransfer.getData('text/plain');
-      const targetIndex = tr.dataset.index;
-
-      if (draggedIndex !== targetIndex) {
-        const newTodos = [...todos];
-
-        // 배열에서 항목을 이동
-        const draggedTodo = newTodos.splice(draggedIndex, 1)[0];
-        newTodos.splice(targetIndex, 0, draggedTodo);
-
-        todos = newTodos;
-        saveTodos(todos);
-        renderTodos(todos);
-      }
-    });
-
-    tbody.appendChild(tr);
-  });
-
-  // 전체 체크박스
-  const toggleAllCheckbox = document.getElementById('toggle-all');
-  toggleAllCheckbox.addEventListener('change', () => {
-    const isChecked = toggleAllCheckbox.checked;
-    const checkboxes = tbody.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach(checkbox => {
-      checkbox.checked = isChecked;
-    });
-  });
-
-  todoList.addEventListener('change', (e) => {
-    if (e.target.type === 'checkbox' && e.target.id !== 'toggle-all') {
-      const checkboxes = tbody.querySelectorAll('input[type="checkbox"]');
-      const checked = tbody.querySelectorAll('input[type="checkbox"]:checked');
-      toggleAllCheckbox.checked = checkboxes.length === checked.length;
-    }
-  });
-
-  const checkboxes = tbody.querySelectorAll('input[type="checkbox"]');
-  const checked = tbody.querySelectorAll('input[type="checkbox"]:checked');
-  toggleAllCheckbox.checked = checkboxes.length > 0 && checkboxes.length === checked.length;
-}
-
-// 필터 함수
-allBtn.addEventListener('click', () => renderTodos(todos));
-
-completedBtn.addEventListener('click', () => {
-  const filtered = todos.filter((todo) => todo.completed);
-  renderTodos(filtered);
-});
-
-uncompletedBtn.addEventListener('click', () => {
-  const filtered = todos.filter((todo) => !todo.completed);
-  renderTodos(filtered);
-});
-
-// 드롭다운
-priorityButton.addEventListener("click", (e) => {
-  dropdown.hidden = !dropdown.hidden;
-  e.stopPropagation();
-});
-
-dropdown.addEventListener('click', (e) => {
-  if (e.target.tagName === 'LI') {
-    const selectedPriority = Number(e.target.dataset.value);
-    const filtered = todos.filter((todo) => todo.priority === selectedPriority);
-    renderTodos(filtered);
-    dropdown.hidden = true;
-  }
-});
-
-// 드롭다운 바깥 클릭 시 닫기
-document.addEventListener('click', () => {
-  dropdown.hidden = true;
-});
-
-// 할일 추가 
 const form = document.querySelector("form");
 const input = form.querySelector("input[type='text']");
 const select = form.querySelector("select");
-
-function getNextId() {
-  const todos = getTodos();
-  if (todos.length === 0) {
-    return 1;
-  }
-  const maxId = Math.max(...todos.map(todo => todo.id));
-  return maxId + 1;
-}
-
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const title = input.value.trim();
-  const priority = select.value;
-
-  // 유효성 검사
-  if (!title || !["1", "2", "3"].includes(priority)) {
-    alert("할 일과 중요도를 모두 입력해주세요!");
-    return;
-  }
-
-  // 새 할 일 객체 생성
-  const newTodo = {
-    id: getNextId(),
-    title,
-    completed: false,
-    priority: Number(priority),
-  };
-
-  // todos 배열에 추가하고 로컬 스토리지에 저장
-  todos.push(newTodo);
-  saveTodos(todos);
-
-  // 다시 렌더링
-  renderTodos(todos);
-
-  input.value = "";
-  select.selectedIndex = 0;
-});
-
 const deleteBtn = document.querySelector('.control-buttons button:nth-child(1)');
 const completeBtn = document.querySelector('.control-buttons button:nth-child(2)');
 const modal = document.getElementById('completed-modal');
 const closeModalBtn = document.getElementById('close-modal');
+const toggleAllCheckbox = document.getElementById('toggle-all');
 
+const loadTodos = () => {
+    const stored = localStorage.getItem("todos");
+    if (stored) return JSON.parse(stored);
+    localStorage.setItem("todos", JSON.stringify(initialTodos));
+    return [...initialTodos];
+};
 
-deleteBtn.addEventListener('click', () => {
-  const checkboxes = document.querySelectorAll('#todo-list tbody input[type="checkbox"]:checked');
-  if (checkboxes.length === 0) return;
+let todos = loadTodos();
 
-  const idsToDelete = Array.from(checkboxes).map(cb => Number(cb.dataset.id));
-  const updated = getTodos().filter(todo => !idsToDelete.includes(todo.id));
-  saveTodos(updated);
-  todos = updated;
-  renderTodos(updated);
-});
+const saveTodos = (todos) => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+};
 
-completeBtn.addEventListener('click', () => {
-  const checkboxes = document.querySelectorAll('#todo-list tbody input[type="checkbox"]:checked');
-  if (checkboxes.length === 0) return;
+const getNextId = () => todos.length ? Math.max(...todos.map(todo => todo.id)) + 1 : 1;
 
-  const idsToComplete = Array.from(checkboxes).map(cb => Number(cb.dataset.id));
-  const currentTodos = getTodos();
+const getSelectedTodoIds = () => {
+    return Array.from(todoList.querySelectorAll('tbody input[type="checkbox"]:checked'))
+        .map(cb => Number(cb.dataset.id));
+};
 
-  const alreadyCompleted = currentTodos.some(todo =>
-    idsToComplete.includes(todo.id) && todo.completed
-  );
+const updateToggleAllCheckbox = () => {
+    const checkboxes = todoList.querySelectorAll('tbody input[type="checkbox"]');
+    toggleAllCheckbox.checked = checkboxes.length && checkboxes.length === todoList.querySelectorAll('tbody input[type="checkbox"]:checked').length;
+};
 
-  if (alreadyCompleted) {
-    modal.classList.add('show');
-    return;
-  }
+const addDragEvents = (row) => {
+    row.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('text/plain', row.dataset.index);
+        setTimeout(() => row.style.opacity = '0.6', 0);
+    });
 
-  const updated = currentTodos.map(todo => {
-    if (idsToComplete.includes(todo.id)) {
-      return { ...todo, completed: true };
+    row.addEventListener('dragend', () => row.style.opacity = '');
+    row.addEventListener('dragover', (e) => e.preventDefault());
+    row.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const draggedIndex = e.dataTransfer.getData('text/plain');
+        const targetIndex = row.dataset.index;
+
+        if (draggedIndex !== targetIndex) {
+            const newTodos = [...todos];
+            const dragged = newTodos.splice(draggedIndex, 1)[0];
+            newTodos.splice(targetIndex, 0, dragged);
+
+            todos = newTodos;
+            saveTodos(todos);
+            renderTodos(todos);
+        }
+    });
+};
+
+const renderTodos = (data) => {
+    const tbody = todoList.querySelector('tbody');
+    tbody.innerHTML = '';
+    data.forEach((todo, index) => {
+        const tr = document.createElement('tr');
+        tr.setAttribute('draggable', 'true');
+        tr.dataset.index = index;
+
+        tr.innerHTML = `
+            <td><input type="checkbox" data-id="${todo.id}" /></td>
+            <td>${todo.priority}</td>
+            <td>${todo.completed ? '✅' : '❌'}</td>
+            <td>${todo.title}</td>
+        `;
+
+        addDragEvents(tr);
+        tbody.appendChild(tr);
+    });
+
+    updateToggleAllCheckbox();
+};
+
+const handleAddTodo = (e) => {
+    e.preventDefault();
+
+    const title = input.value.trim();
+    const priority = select.value;
+
+    if (!title || !["1", "2", "3"].includes(priority)) {
+        alert("할 일과 중요도를 모두 입력해주세요!");
+        return;
     }
-    return todo;
-  });
 
-  saveTodos(updated);
-  todos = updated;
-  renderTodos(updated);
+    const newTodo = {
+        id: getNextId(),
+        title,
+        completed: false,
+        priority: Number(priority),
+    };
+
+    todos.push(newTodo);
+    saveTodos(todos);
+    renderTodos(todos);
+
+    input.value = "";
+    select.selectedIndex = 0;
+};
+
+const handleDelete = () => {
+    const selectedIds = getSelectedTodoIds();
+    if (selectedIds.length === 0) return;
+
+    todos = todos.filter(todo => !selectedIds.includes(todo.id));
+    saveTodos(todos);
+    renderTodos(todos);
+};
+
+const handleComplete = () => {
+    const selectedIds = getSelectedTodoIds();
+    if (selectedIds.length === 0) return;
+
+    const alreadyCompleted = todos.some(todo =>
+        selectedIds.includes(todo.id) && todo.completed
+    );
+
+    if (alreadyCompleted) {
+        modal.classList.add('show');
+        return;
+    }
+
+    todos = todos.map(todo =>
+        selectedIds.includes(todo.id) ? { ...todo, completed: true } : todo
+    );
+
+    saveTodos(todos);
+    renderTodos(todos);
+};
+
+renderTodos(todos);
+
+allBtn.addEventListener('click', () => renderTodos(todos));
+completedBtn.addEventListener('click', () => renderTodos(todos.filter(todo => todo.completed)));
+uncompletedBtn.addEventListener('click', () => renderTodos(todos.filter(todo => !todo.completed)));
+
+priorityButton.addEventListener("click", (e) => {
+    dropdown.hidden = !dropdown.hidden;
+    e.stopPropagation();
 });
 
-closeModalBtn.addEventListener('click', () => {
-  modal.classList.remove('show');
+dropdown.addEventListener('click', (e) => {
+    if (e.target.tagName === 'LI') {
+        const selectedPriority = Number(e.target.dataset.value);
+        renderTodos(todos.filter(todo => todo.priority === selectedPriority));
+        dropdown.hidden = true;
+    }
 });
 
-// 초기 로드
-const currentTodos = getTodos();
-renderTodos(currentTodos);
+document.addEventListener('click', () => dropdown.hidden = true);
+
+form.addEventListener("submit", handleAddTodo);
+deleteBtn.addEventListener('click', handleDelete);
+completeBtn.addEventListener('click', handleComplete);
+closeModalBtn.addEventListener('click', () => modal.classList.remove('show'));
+
+toggleAllCheckbox.addEventListener('change', () => {
+    const checkboxes = todoList.querySelectorAll('tbody input[type="checkbox"]');
+    checkboxes.forEach(cb => cb.checked = toggleAllCheckbox.checked);
+});
+
+todoList.addEventListener('change', (e) => {
+    if (e.target.type === 'checkbox' && e.target.id !== 'toggle-all') {
+        updateToggleAllCheckbox();
+    }
+});
