@@ -1,0 +1,9 @@
+/* Header.module.css */
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  background-color: lemonchiffon;
+}
