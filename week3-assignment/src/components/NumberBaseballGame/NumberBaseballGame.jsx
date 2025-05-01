@@ -1,8 +1,14 @@
 import useNumberBaseballGame from '../../hooks/useNumberBaseballGame';
-import { wrapperStyle, inputStyle, messageStyle, listStyle } from './NumberBaseballGame.style';
+import {
+  wrapperStyle,
+  inputStyle,
+  messageStyle,
+  listStyle,
+} from './NumberBaseballGame.style';
 
 const NumberBaseballGame = () => {
-  const { inputValue, message, tries, handleChange, handleKeyDown } = useNumberBaseballGame();
+  const { inputValue, message, tries, handleChange, handleKeyDown } =
+    useNumberBaseballGame();
 
   return (
     <div css={wrapperStyle}>
@@ -13,12 +19,15 @@ const NumberBaseballGame = () => {
         onChange={handleChange}
         onKeyDown={handleKeyDown}
       />
-      <div css={messageStyle}>{message}</div>
-      <ul css={listStyle}>
-        {tries.map((t, i) => (
-          <li key={i}>{t}</li>
-        ))}
-      </ul>
+      {message && <div css={messageStyle}>{message}</div>}
+
+      {tries.length > 0 && (
+        <ul css={listStyle}>
+          {tries.map((t, i) => (
+            <li key={i}>{t}</li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
