@@ -1,54 +1,31 @@
-import { useState } from 'react';
 import {
   wrapperStyle,
   inputStyle,
+  recentWrapperStyle,
   recentKeywordStyle,
   loadingSpinnerStyle,
-  errorMessageStyle
+  errorMessageStyle,
+  cardStyle,
+  imageStyle,
+  closeButtonStyle,
+  nameStyle,
+  followInfoWrapper,
+  followInfoItem,
 } from './GithubSearch.style';
 
+import { useGithubSearch } from '../../hooks/useGithubUserInfo';
+
 const GithubSearch = () => {
-  const [input, setInput] = useState('');
-  const [userInfo, setUserInfo] = useState({ status: 'idle', data: null });
-  const [recent, setRecent] = useState([]);
-
-  const getUserInfo = async (user) => {
-    setUserInfo({ status: 'pending', data: null });
-    try {
-      const res = await fetch(`https://api.github.com/users/${user}`);
-      if (!res.ok) throw new Error();
-      const data = await res.json();
-      setUserInfo({ status: 'resolved', data });
-  
-      if (!recent.includes(user)) {
-        const updated = [...recent];
-        updated.push(user);
-        if (updated.length > 3) updated.shift();
-  
-        setRecent(updated);
-        localStorage.setItem('userList', JSON.stringify(updated));
-      }
-    } catch {
-      setUserInfo({ status: 'rejected', data: null });
-    }
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && input.trim()) {
-      getUserInfo(input.trim());
-      setInput('');
-    }
-  };
-
-  const removeProfile = () => {
-    setUserInfo({ status: 'idle', data: null });
-  };
-
-  const removeRecent = (user) => {
-    const updated = recent.filter((r) => r !== user);
-    setRecent(updated);
-    localStorage.setItem('userList', JSON.stringify(updated));
-  };
+  const {
+    input,
+    setInput,
+    userInfo,
+    recent,
+    getUserInfo,
+    handleKeyDown,
+    removeProfile,
+    removeRecent,
+  } = useGithubSearch();
 
   return (
     <div css={wrapperStyle}>
@@ -61,7 +38,7 @@ const GithubSearch = () => {
       />
 
       {recent.length > 0 && (
-        <>
+        <div css={recentWrapperStyle}>
           <h3>최근 검색어</h3>
           <div>
             {recent.map((user) => (
@@ -71,7 +48,7 @@ const GithubSearch = () => {
               </span>
             ))}
           </div>
-        </>
+        </div>
       )}
 
       {userInfo.status === 'pending' && <div css={loadingSpinnerStyle}></div>}
@@ -81,25 +58,40 @@ const GithubSearch = () => {
         </p>
       )}
       {userInfo.status === 'resolved' && userInfo.data && (
-        <div>
-          <button onClick={removeProfile}>x</button>
+        <div css={cardStyle}>
+          <button css={closeButtonStyle} onClick={removeProfile}>x</button>
           <a
             href={userInfo.data.html_url}
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src={userInfo.data.avatar_url} alt="avatar" />
+            <img src={userInfo.data.avatar_url} alt="avatar" css={imageStyle} />
           </a>
-          <a
-            href={userInfo.data.html_url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h3>{userInfo.data.name || userInfo.data.login}</h3>
-          </a>
-          <p>{userInfo.data.bio}</p>
-          <p>팔로워: {userInfo.data.followers}</p>
-          <p>팔로잉: {userInfo.data.following}</p>
+
+          {userInfo.data.name && (
+            <a
+              href={userInfo.data.html_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              css={nameStyle}
+            >
+              {userInfo.data.name}
+            </a>
+          )}
+
+          {userInfo.data.login && <p css={nameStyle}>{userInfo.data.login}</p>}
+          {userInfo.data.bio && <p css={nameStyle}>{userInfo.data.bio}</p>}
+
+          <div css={followInfoWrapper}>
+            <div css={followInfoItem}>
+              <p>Followers</p>
+              <p>{userInfo.data.followers}</p>
+            </div>
+            <div css={followInfoItem}>
+              <p>Following</p>
+              <p>{userInfo.data.following}</p>
+            </div>
+          </div>
         </div>
       )}
     </div>
