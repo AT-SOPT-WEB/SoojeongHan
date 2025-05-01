@@ -1,10 +1,22 @@
+import { useState } from "react";
+import Header from "./components/Header";
+import GithubSearch from "./components/GithubSearch";
+import NumberBaseballGame from "./components/NumberBaseballGame";
+
 function App() {
+  const [page, setPage] = useState("깃허브");
+
+  const pages = {
+    깃허브: <GithubSearch />,
+    야구: <NumberBaseballGame />,
+  };
 
   return (
     <>
-      <h1>3주차 과제 세팅</h1>
+      <Header selectedPage={page} onChangePage={setPage} />
+      {pages[page]}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
