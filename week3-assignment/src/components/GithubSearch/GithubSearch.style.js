@@ -23,12 +23,14 @@ export const inputStyle = css`
     outline: none;
   }
 `;
+
 export const recentWrapperStyle = css`
   display: flex;
   flex-direction: column;
-  justify-content: left;
+  justify-content: flex-start;
   width: 100%;
   gap: 1rem;
+
   h3 {
     font-size: 1.8rem;
     font-weight: 500;
@@ -38,16 +40,17 @@ export const recentWrapperStyle = css`
 export const recentKeywordStyle = css`
   display: inline-flex;
   align-items: center;
-  border-radius: 20px;
   padding: 0.5rem;
   margin-right: 1rem;
+
+  border-radius: 20px;
   border: 1.5px solid #142755;
 
   button {
-    background: transparent;
-    border: none;
-    cursor: pointer;
     font-size: 1.2rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
   }
 
   &:hover {
@@ -55,46 +58,57 @@ export const recentKeywordStyle = css`
   }
 `;
 
-export const loadingSpinnerStyle = {
-  width: '40px',
-  height: '40px',
-  border: '5px solid #ccc',
-  borderTop: '5px solid #142755',
-  borderRadius: '50%',
-  animation: 'spin 1s linear infinite',
-  margin: '2rem auto',
-  display: 'block',
-  '@keyframes spin': {
-    from: { transform: 'rotate(0deg)' },
-    to: { transform: 'rotate(360deg)' },
-  },
-};
+export const loadingSpinnerStyle = css`
+  display: block;
+  margin: 2rem auto;
+  width: 4rem;
+  height: 4rem;
+
+  border: 5px solid #ccc;
+  border-top: 5px solid #142755;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+`;
 
 export const errorMessageStyle = css`
+  display: flex;
+  justify-content: center;
   width: 100%;
   font-size: 1.8rem;
   font-weight: 500;
 `;
+
 export const cardStyle = css`
-  position: relative;
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
   padding: 3rem 6rem;
   gap: 2rem;
+
   border-radius: 20px;
   background-color: #5f84a2;
-  color: white;
+  color: #fff;
 `;
 
 export const closeButtonStyle = css`
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: none;
+
   border: none;
-  color: #cadeed;
   font-size: 2rem;
+  color: #cadeed;
+  background: none;
   cursor: pointer;
 `;
 
@@ -111,10 +125,10 @@ export const imageStyle = css`
 `;
 
 export const nameStyle = css`
+  text-align: center;
   font-size: 2.2rem;
   font-weight: 500;
   color: white;
-  text-align: center;
   text-decoration: none;
 `;
 
@@ -130,6 +144,7 @@ export const followInfoItem = css`
   align-items: center;
   padding: 2rem;
   gap: 1rem;
+
   font-size: 2.2rem;
   font-weight: 500;
   border-radius: 5px;

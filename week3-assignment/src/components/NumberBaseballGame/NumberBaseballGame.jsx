@@ -1,10 +1,10 @@
-import useNumberBaseballGame from '../../hooks/useNumberBaseballGame';
 import {
   wrapperStyle,
   inputStyle,
   messageStyle,
   listStyle,
 } from './NumberBaseballGame.style';
+import useNumberBaseballGame from '../../hooks/useNumberBaseballGame';
 
 const NumberBaseballGame = () => {
   const { inputValue, message, tries, handleChange, handleKeyDown } =

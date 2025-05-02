@@ -12,7 +12,6 @@ import {
   followInfoWrapper,
   followInfoItem,
 } from './GithubSearch.style';
-
 import { useGithubSearch } from '../../hooks/useGithubUserInfo';
 
 const GithubSearch = () => {
@@ -44,7 +43,12 @@ const GithubSearch = () => {
             {recent.map((user) => (
               <span key={user} css={recentKeywordStyle}>
                 <button onClick={() => getUserInfo(user)}>{user}</button>
-                <button onClick={() => removeRecent(user)}>x</button>
+                <button
+                  onClick={() => removeRecent(user)}
+                  aria-label="최근 검색어 삭제"
+                >
+                  x
+                </button>
               </span>
             ))}
           </div>
@@ -59,13 +63,20 @@ const GithubSearch = () => {
       )}
       {userInfo.status === 'resolved' && userInfo.data && (
         <div css={cardStyle}>
-          <button css={closeButtonStyle} onClick={removeProfile}>x</button>
+          <button css={closeButtonStyle} onClick={removeProfile}>
+            x
+          </button>
           <a
             href={userInfo.data.html_url}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="깃허브 프로필로 이동"
           >
-            <img src={userInfo.data.avatar_url} alt="avatar" css={imageStyle} />
+            <img
+              src={userInfo.data.avatar_url}
+              alt="프로필 이미지"
+              css={imageStyle}
+            />
           </a>
 
           {userInfo.data.name && (

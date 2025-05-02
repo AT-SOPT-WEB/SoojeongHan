@@ -15,6 +15,7 @@ export const inputStyle = css`
   width: 100%;
   box-sizing: border-box;
   font-size: 1.5rem;
+
   border-radius: 20px;
   border: 1.5px solid #142755;
   background-color: #eceff5;
@@ -33,11 +34,11 @@ export const messageStyle = css`
 export const listStyle = css`
   display: flex;
   flex-direction: column;
-  width: 100%;
-
   text-align: center;
-  font-size: 2rem;
   gap: 1rem;
+
+  width: 100%;
+  font-size: 2rem;
 
   li {
     padding: 1.5rem;
