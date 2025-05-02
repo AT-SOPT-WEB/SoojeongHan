@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { fetchUserInfo } from '../utils/githubApi';
-import { saveToLocalStorage, loadFromLocalStorage } from '../utils/localStorage';
+import {
+  saveToLocalStorage,
+  loadFromLocalStorage,
+} from '../utils/localStorage';
 
 export const useGithubSearch = () => {
   const [input, setInput] = useState('');

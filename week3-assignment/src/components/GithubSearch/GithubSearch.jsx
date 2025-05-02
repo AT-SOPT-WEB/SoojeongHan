@@ -1,18 +1,13 @@
 import {
   wrapperStyle,
-  inputStyle,
   recentWrapperStyle,
   recentKeywordStyle,
   loadingSpinnerStyle,
   errorMessageStyle,
-  cardStyle,
-  imageStyle,
-  closeButtonStyle,
-  nameStyle,
-  followInfoWrapper,
-  followInfoItem,
 } from './GithubSearch.style';
 import { useGithubSearch } from '../../hooks/useGithubUserInfo';
+import Input from '../Input/Input';
+import GithubCard from '../GithubCard/GithubCard';
 
 const GithubSearch = () => {
   const {
@@ -28,14 +23,15 @@ const GithubSearch = () => {
 
   return (
     <div css={wrapperStyle}>
-      <input
-        css={inputStyle}
-        placeholder="Github 프로필을 검색해보세요."
+      {/* 깃허브 검색 */}
+      <Input
         value={input}
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={handleKeyDown}
+        placeholder="Github 프로필을 검색해보세요."
       />
 
+      {/* 최근 검색어 */}
       {recent.length > 0 && (
         <div css={recentWrapperStyle}>
           <h3>최근 검색어</h3>
@@ -55,6 +51,7 @@ const GithubSearch = () => {
         </div>
       )}
 
+      {/* 검색 결과 */}
       {userInfo.status === 'pending' && <div css={loadingSpinnerStyle}></div>}
       {userInfo.status === 'rejected' && (
         <p css={errorMessageStyle}>
@@ -62,48 +59,7 @@ const GithubSearch = () => {
         </p>
       )}
       {userInfo.status === 'resolved' && userInfo.data && (
-        <div css={cardStyle}>
-          <button css={closeButtonStyle} onClick={removeProfile}>
-            x
-          </button>
-          <a
-            href={userInfo.data.html_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="깃허브 프로필로 이동"
-          >
-            <img
-              src={userInfo.data.avatar_url}
-              alt="프로필 이미지"
-              css={imageStyle}
-            />
-          </a>
-
-          {userInfo.data.name && (
-            <a
-              href={userInfo.data.html_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              css={nameStyle}
-            >
-              {userInfo.data.name}
-            </a>
-          )}
-
-          {userInfo.data.login && <p css={nameStyle}>{userInfo.data.login}</p>}
-          {userInfo.data.bio && <p css={nameStyle}>{userInfo.data.bio}</p>}
-
-          <div css={followInfoWrapper}>
-            <div css={followInfoItem}>
-              <p>Followers</p>
-              <p>{userInfo.data.followers}</p>
-            </div>
-            <div css={followInfoItem}>
-              <p>Following</p>
-              <p>{userInfo.data.following}</p>
-            </div>
-          </div>
-        </div>
+        <GithubCard user={userInfo.data} onClose={removeProfile} />
       )}
     </div>
   );

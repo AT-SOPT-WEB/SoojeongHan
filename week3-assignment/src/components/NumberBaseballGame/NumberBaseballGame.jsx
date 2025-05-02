@@ -1,10 +1,10 @@
 import {
   wrapperStyle,
-  inputStyle,
   messageStyle,
   listStyle,
 } from './NumberBaseballGame.style';
 import useNumberBaseballGame from '../../hooks/useNumberBaseballGame';
+import Input from '../Input/Input';
 
 const NumberBaseballGame = () => {
   const { inputValue, message, tries, handleChange, handleKeyDown } =
@@ -12,15 +12,18 @@ const NumberBaseballGame = () => {
 
   return (
     <div css={wrapperStyle}>
-      <input
-        css={inputStyle}
-        placeholder="3자리 숫자를 입력해주세요."
+      {/* 숫자 입력 */}
+      <Input
         value={inputValue}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
+        placeholder="3자리 숫자를 입력해주세요."
       />
-      {message && <div css={messageStyle}>{message}</div>}
 
+      {/* 입력에 대한 정보 */}
+      {message && <h2 css={messageStyle}>{message}</h2>}
+
+      {/* 게임 진행 상황 */}
       {tries.length > 0 && (
         <ul css={listStyle}>
           {tries.map((t, i) => (

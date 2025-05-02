@@ -38,7 +38,7 @@ export const listStyle = css`
   gap: 1rem;
 
   width: 100%;
-  font-size: 2rem;
+  font-size: 1.5rem;
 
   li {
     padding: 1.5rem;
