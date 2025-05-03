@@ -1,0 +1,143 @@
+body {
+  padding: 0 20rem;
+  min-width: 35rem;
+  font-size: 1.3rem;
+}
+
+nav {
+  display: flex;
+  padding: 2rem 0;
+  gap: 1rem;
+}
+
+main{
+  padding: 1.5rem 1rem;
+  border-radius: 5px;
+  background-color: #eee;
+}
+
+button {
+  padding: 0.5rem 1rem;
+
+  border: none;
+  border-radius: 5px;
+
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* 드롭다운  */
+.priority-select {
+  display: inline-block;
+  position: relative;
+}
+
+#priority-options {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #fff;
+}
+
+#priority-options li {
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+#priority-options li:hover {
+  background: #eee;
+}
+
+form {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+form input[type="text"],
+form select
+{
+  height: 3rem;
+  padding: 0 0.5rem;
+  box-sizing: border-box;
+}
+
+form input[type="text"] {
+  flex: 1;
+}
+
+.control-buttons {
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 1rem 0;
+  gap: 0.5em;
+}
+
+/* 할일 목록 */
+#todo-list {
+  width: 100%;
+  table-layout: fixed;
+}
+
+#todo-list thead {
+  background-color: #333;
+  color: #fff;
+}
+
+#todo-list th:nth-child(1),
+#todo-list th:nth-child(2),
+#todo-list th:nth-child(3){
+  width: 5rem;
+}
+
+#todo-list th {
+  padding: 1rem;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#todo-list td {
+  padding: 1rem;
+  text-align: center;
+  vertical-align: middle;
+
+  background: #fff;
+  border-top: 1px solid #ddd;
+}
+
+/* 모달 */
+.modal {
+  display: none;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+
+  padding: 4rem;
+  align-items: center;
+  gap:2rem;
+
+  border-radius: 5px;
+  background: white;
+}

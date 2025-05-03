@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="reset.css" />
+  <link rel="stylesheet" href="style.css" />
+  <title>투두 만들기</title>
+</head>
+<body>
+  <!-- 상단 필터 -->
+  <nav aria-label="할일 목록 필터">
+    <button id="filter-all">전체</button>
+    <button id="filter-completed">완료됨</button>
+    <button id="filter-uncompleted">미완료</button>
+    <div class="priority-select">
+      <button id="priority-button">중요도 ▼</button>
+      <ul id="priority-options" hidden>
+        <li data-value="1">1</li>
+        <li data-value="2">2</li>
+        <li data-value="3">3</li>
+      </ul>
+    </div>
+  </nav>
+  
+  <!-- 메인 -->
+  <main>
+    <!-- 할일 추가 섹션 -->
+    <section aria-label="할일 추가하기">
+      <form>
+        <input type="text" placeholder="할 일을 입력하세요" />
+        <select aria-label="중요도 선택">
+          <option hidden selected>중요도 선택</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+        </select>
+        <button type="submit">추가</button>
+      </form>
+      <div class="control-buttons">
+        <button>삭제</button>
+        <button>완료</button>
+      </div>
+    </section>
+
+    <!-- 할일 목록 섹션 -->
+    <section aria-label="할일 목록">
+      <table id="todo-list">
+        <thead>
+          <tr>
+            <th><input type="checkbox" id="toggle-all"/></th>
+            <th>중요도</th>
+            <th>완료됨</th>
+            <th>할 일</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- todos.js -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <div id="completed-modal" class="modal" hidden>
+    <div class="modal-content">
+      <p>이미 완료된 todo입니다.</p>
+      <button id="close-modal">닫기</button>
+    </div>
+  </div>
+
+  <script type="module" src="index.js"></script>
+</body>
+</html>
