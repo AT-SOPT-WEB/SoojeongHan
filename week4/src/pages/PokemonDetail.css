@@ -1,0 +1,79 @@
+.pokemon-list {
+  padding: 2rem;
+  text-align: center;
+}
+
+.pokemon-list h1 {
+  color: #2c3e50;
+  margin-bottom: 2rem;
+}
+
+.pokemon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pokemon-card {
+  text-decoration: none;
+  color: inherit;
+  background: white;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.pokemon-card:hover {
+  transform: translateY(-5px);
+}
+
+.pokemon-card img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+.pokemon-card h2 {
+  margin-top: 1rem;
+  color: #2c3e50;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.5rem;
+  color: #2c3e50;
+}
+
+.load-more-button {
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.load-more-button:hover {
+  background-color: #2980b9;
+}
+
+.load-more-button:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.back-button {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
