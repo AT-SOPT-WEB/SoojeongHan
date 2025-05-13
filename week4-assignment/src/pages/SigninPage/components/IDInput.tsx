@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Input from '@shared/components/Input/Input';
 import Button from '@shared/components/Button/Button';
+import ErrorMessage from '@shared/components/ErrorMessage/ErrorMessage';
 
 interface Props {
   onNext: () => void;
@@ -15,15 +16,22 @@ const IDInput = ({ onNext }: Props) => {
   // 길이 조건 + 정규식 모두 만족해야 유효
   const isValidId = id.length >= 8 && id.length <= 20 && idRegex.test(id);
 
+  const isLengthInvalid = id.length > 20;
+
   return (
     <>
       <Input
         label="아이디"
         placeholder="아이디를 입력해주세요 (8~20자, 대소문자/숫자만 가능)"
         value={id}
-        onChange={(e) => setId(e.target.value)} // 아이디 입력값 변경
+        onChange={(e) => setId(e.target.value)}
       />
-      <Button onClick={onNext} disabled={!isValidId}>다음</Button> {/* 아이디가 유효하면 버튼 활성화 */}
+      
+      {isLengthInvalid && (
+        <ErrorMessage message="아이디는 최대 20자까지만 입력 가능합니다." />
+      )}
+
+      <Button onClick={onNext} disabled={!isValidId}>다음</Button>
     </>
   );
 };

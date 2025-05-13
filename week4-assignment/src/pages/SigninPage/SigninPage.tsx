@@ -5,6 +5,7 @@ import NicknameInput from '@pages/SigninPage/components/NicknameInput';
 import Head from '@shared/components/Head/Head';
 import theme from '@styles/theme';
 import { Link } from 'react-router-dom';
+import routePath from "@routes/routhPath";
 
 const SigninPage = () => {
   const [step, setStep] = useState(1);
@@ -28,7 +29,7 @@ const SigninPage = () => {
         <p>
           이미 회원이신가요?
           <Link
-            to="/"
+            to={routePath.LOGIN}
             css={{
               fontSize: '1.8rem',
               textDecoration: 'underline',

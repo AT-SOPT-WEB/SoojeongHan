@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Input from '@shared/components/Input/Input';
 import Button from '@shared/components/Button/Button';
+import routePath from "@routes/routhPath";
 
 const NicknameInput = () => {
   const navigate = useNavigate();
@@ -9,7 +10,7 @@ const NicknameInput = () => {
 
   const handleFinish = () => {
     // 회원가입 완료 처리 로직 추가
-    navigate('/');
+    navigate(routePath.MYINFO);
   };
 
   const isValid = nickname.trim().length > 0;

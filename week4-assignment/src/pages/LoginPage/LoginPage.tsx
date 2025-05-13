@@ -4,6 +4,7 @@ import Button from '@shared/components/Button/Button';
 import Head from '@shared/components/Head/Head';
 import Input from '@shared/components/Input/Input';
 import theme from '@styles/theme';
+import routePath from "@routes/routhPath";
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
@@ -37,7 +38,7 @@ const LoginPage = () => {
 
       <div css={{ textAlign: 'center', marginTop: '1rem' }}>
         <Link
-          to="/signin"
+          to={routePath.SIGNIN}
           css={{
             fontSize: '1.8rem',
             textDecoration: 'underline',

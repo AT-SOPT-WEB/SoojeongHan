@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaUser, FaBars, FaTimes } from 'react-icons/fa'; // Import FaTimes
+import { FaUser, FaBars, FaTimes } from 'react-icons/fa';
 import {
   headerStyle,
   menuLinkStyle,
@@ -10,6 +10,7 @@ import {
   hamburgerButtonStyle,
 } from './Header.style';
 import theme from '@styles/theme';
+import routePath from "@routes/routhPath";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,13 +38,13 @@ const Header = () => {
             gap: '6rem',
           }}
         >
-          <Link to="/my/info" css={menuLinkStyle}>
+          <Link to={routePath.MYINFO} css={menuLinkStyle}>
             내 정보
           </Link>
-          <Link to="/my/search" css={menuLinkStyle}>
+          <Link to={routePath.MYSEARCH} css={menuLinkStyle}>
             sopt 회원 조회하기
           </Link>
-          <Link to="/" css={menuLinkStyle}>
+          <Link to={routePath.LOGIN} css={menuLinkStyle}>
             로그아웃
           </Link>
         </div>
@@ -64,13 +65,13 @@ const Header = () => {
 
       {isMenuOpen && isMobileView && (
         <div css={mobileMenuStyle}>
-          <Link to="/my/info" css={menuLinkStyle}>
+          <Link to={routePath.MYINFO} css={menuLinkStyle}>
             내 정보
           </Link>
-          <Link to="/my/search" css={menuLinkStyle}>
+          <Link to={routePath.MYSEARCH} css={menuLinkStyle}>
             sopt 회원 조회하기
           </Link>
-          <Link to="/" css={menuLinkStyle}>
+          <Link to={routePath.LOGIN} css={menuLinkStyle}>
             로그아웃
           </Link>
         </div>
