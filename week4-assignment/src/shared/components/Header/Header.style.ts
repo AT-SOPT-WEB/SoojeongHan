@@ -2,17 +2,16 @@ import { css } from '@emotion/react';
 import theme from '@styles/theme';
 
 export const headerStyle = css`
-  background-color: ${theme.color.purpleAccent};
-  color: ${theme.color.white};
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
+  z-index: 100;
+  background-color: ${theme.color.purpleAccent};
+  color: ${theme.color.white};
   display: flex;
   justify-content: space-between;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  z-index: 10;
+  padding: 0 1rem;
 `;
 
 export const headerContainerStyle = css`
@@ -21,14 +20,6 @@ export const headerContainerStyle = css`
   width: 100%;
   justify-content: space-between;
   align-items: center;
-`;
-
-export const leftMenuStyle = css`
-  display: flex;
-  gap: 6rem;
-  @media (max-width: 768px) {
-    display: none;
-  }
 `;
 
 export const hamburgerButtonStyle = css`
@@ -62,48 +53,54 @@ export const userContainerStyle = css`
 `;
 
 export const mobileMenuStyle = css`
-  position: absolute;
+  position: fixed;
   top: 80px;
   left: 0;
   right: 0;
   background-color: ${theme.color.purpleAccent};
   padding: 3rem;
-  z-index: 1;
-
+  z-index: 6;
   display: flex;
   flex-direction: column;
   gap: 6rem;
   width: 100%;
-
   animation: slideIn 0.3s ease-out forwards;
 
-  &.closed {
-    animation: slideOut 0.3s ease-in forwards;
-  }
-
   @keyframes slideIn {
-    0% {
+    from {
       transform: translateY(-100%);
       opacity: 0;
     }
-    100% {
+    to {
       transform: translateY(0);
       opacity: 1;
-    }
-  }
-
-  @keyframes slideOut {
-    0% {
-      transform: translateY(0);
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(-100%);
-      opacity: 0;
     }
   }
 
   @media (max-width: 768px) {
     display: flex;
+  }
+`;
+
+export const overlayStyle = css`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+`;
+
+export const closeStyle = css`
+  animation: slideOut 0.3s ease-in forwards;
+
+  @keyframes slideOut {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
   }
 `;
