@@ -1,7 +1,8 @@
 const routePath = {
   LOGIN: '/',
   SIGNIN: '/signin',
-  MY: '/my',
+  MYSEARCH: '/my/search',
+  MYINFO: 'my/info',
 } as const;
 
 export default routePath;

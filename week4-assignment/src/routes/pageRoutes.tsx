@@ -2,7 +2,10 @@ import type { RouteObject } from 'react-router-dom';
 
 import LoginPage from '@pages/LoginPage/LoginPage';
 import SigninPage from '@pages/SigninPage/SigninPage';
-import MyPage from '@pages/MyPage/MyPage';
+import MySearchPage from '@pages/MySearchPage/MySearchPage';
+import MyInfoPage from '@pages/MyInfoPage/MyInfoPage';
+import Layout from '@routes/Layout';
+
 import routePath from '@/routes/routhPath';
 
 const pageRoutes: RouteObject[] = [
@@ -15,8 +18,17 @@ const pageRoutes: RouteObject[] = [
     element: <SigninPage />,
   },
   {
-    path: routePath.MY,
-    element: <MyPage />,
+    element: <Layout />,
+    children: [
+      {
+        path: routePath.MYSEARCH,
+        element: <MySearchPage />,
+      },
+      {
+        path: routePath.MYINFO,
+        element: <MyInfoPage />,
+      },
+    ],
   },
 ];
 

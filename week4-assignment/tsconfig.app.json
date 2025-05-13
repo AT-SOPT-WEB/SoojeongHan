@@ -28,13 +28,13 @@
     "paths": {
       "@apis/*": ["./src/apis/*"],
       "@assets/*": ["./src/assets/*"],
-      "@components/*": ["./src/components/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@pages/*": ["./src/pages/*"],
       "@routes/*": ["./src/routes/*"],
       "@styles/*": ["./src/styles/*"],
       "@app-types/*": ["./src/types/*"],
       "@utils/*": ["./src/utils/*"],
+      "@shared/*": ["./src/shared/*"],
       "@/*": ["./src/*"]
     }
   },
