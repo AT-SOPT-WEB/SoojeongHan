@@ -5,7 +5,7 @@ import NicknameInput from '@pages/SigninPage/components/NicknameInput';
 import Head from '@shared/components/Head/Head';
 import theme from '@styles/theme';
 import { Link } from 'react-router-dom';
-import routePath from "@routes/routhPath";
+import routePath from '@routes/routhPath';
 
 const SigninPage = () => {
   const [step, setStep] = useState(1);

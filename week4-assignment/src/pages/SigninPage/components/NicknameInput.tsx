@@ -9,7 +9,7 @@ const NicknameInput = () => {
   const [nickname, setNickname] = useState('');
 
   const handleFinish = () => {
-    // 회원가입 완료 처리 로직 추가
+
     navigate(routePath.MYINFO);
   };
 

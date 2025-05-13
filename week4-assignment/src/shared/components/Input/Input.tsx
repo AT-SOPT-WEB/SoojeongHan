@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { inputWrapperStyle, labelStyle, inputStyle, iconStyle } from './Input.style';
+import {
+  inputWrapperStyle,
+  labelStyle,
+  inputStyle,
+  iconStyle,
+} from './Input.style';
 
 interface InputProps {
   label?: string;
@@ -43,7 +48,11 @@ const Input = ({
           onChange={onChange}
         />
         {shouldToggle && (
-          <button type="button" onClick={togglePasswordVisibility} css={iconStyle}>
+          <button
+            type="button"
+            onClick={togglePasswordVisibility}
+            css={iconStyle}
+          >
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </button>
         )}

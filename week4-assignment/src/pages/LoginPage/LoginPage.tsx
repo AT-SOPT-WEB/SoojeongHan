@@ -10,7 +10,6 @@ const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  // 아이디와 비밀번호 모두 입력되었는지 체크
   const isFormValid = username && password;
 
   return (
@@ -26,15 +25,15 @@ const LoginPage = () => {
       <Input 
         placeholder="아이디" 
         value={username}
-        onChange={(e) => setUsername(e.target.value)} // 아이디 입력값 변경
+        onChange={(e) => setUsername(e.target.value)}
       />
       <Input 
         type="password" 
         placeholder="비밀번호" 
         value={password}
-        onChange={(e) => setPassword(e.target.value)} // 비밀번호 입력값 변경
+        onChange={(e) => setPassword(e.target.value)}
       />
-      <Button disabled={!isFormValid}>로그인</Button> {/* 입력값이 없으면 버튼 비활성화 */}
+      <Button disabled={!isFormValid}>로그인</Button>
 
       <div css={{ textAlign: 'center', marginTop: '1rem' }}>
         <Link

@@ -10,10 +10,8 @@ interface Props {
 const IDInput = ({ onNext }: Props) => {
   const [id, setId] = useState('');
 
-  // 정규식: 영문 대소문자/숫자만 허용
   const idRegex = /^[A-Za-z0-9]+$/;
 
-  // 길이 조건 + 정규식 모두 만족해야 유효
   const isValidId = id.length >= 8 && id.length <= 20 && idRegex.test(id);
 
   const isLengthInvalid = id.length > 20;
